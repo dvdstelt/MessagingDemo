@@ -1,0 +1,17 @@
+﻿@model List<Sales.Data.Models.Product>
+@{
+	Layout = null;
+}
+
+<div class="cart">
+	<p>@Model.Count items in cart:</p>
+	<ul>
+		@foreach (var item in Model.GroupBy(s => s.Id))
+		{
+			var product = item.First();
+
+			<li>@item.Count() x @product.Description <span class="options"><a href="~/ShoppingCart/RemoveItem/@product.Id">remove</a></span></li>
+		}
+	</ul>
+	<p><b>Total : € @Model.Sum(s => s.Price)</b></p>
+</div>
